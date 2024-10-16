@@ -20,3 +20,7 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+Route::group(['middleware'=>'auth'],function(){
+  Route::post('upload-image',[App\Http\Controllers\HomeController::class, 'upload_image'])->name('upload-image');
+});

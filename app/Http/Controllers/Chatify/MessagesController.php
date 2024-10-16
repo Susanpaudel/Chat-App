@@ -270,10 +270,11 @@ class MessagesController extends Controller
         ->select(
             'users.id',
             'users.name',
+            'users.avatar',
             'users.email', // Add only required fields in SELECT
             DB::raw('MAX(ch_messages.created_at) as max_created_at')
         )
-        ->groupBy('users.id', 'users.name', 'users.email') // Group by all non-aggregated columns
+        ->groupBy('users.id', 'users.name', 'users.email','users.avatar') // Group by all non-aggregated columns
         ->orderBy('max_created_at', 'desc')
         ->paginate($request->per_page ?? $this->perPage);
 
